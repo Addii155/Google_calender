@@ -1,9 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useReducer,
-  useMemo,
-} from "react";
+// In your ContextWrapper component (e.g., ContextWrapper.jsx)
+import React, { useState, useEffect, useReducer, useMemo } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 
@@ -34,25 +30,24 @@ export default function ContextWrapper(props) {
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [labels, setLabels] = useState([]);
+  const [tasks, setTasks] = useState([]); // <-- add tasks state here
+  const [filteredTasks, setFilteredTasks] = useState([]); // for storing tasks filtered by label
+  const [currlabel, setCurrLabel] = useState("work");
   const [savedEvents, dispatchCalEvent] = useReducer(
     savedEventsReducer,
     [],
     initEvents
   );
-
   const filteredEvents = useMemo(() => {
     return savedEvents.filter((evt) =>
-      labels
-        .filter((lbl) => lbl.checked)
-        .map((lbl) => lbl.label)
-        .includes(evt.label)
+      evt.label==currlabel
     );
-  }, [savedEvents, labels]);
-
+  }, [savedEvents, labels,currlabel]);
   useEffect(() => {
     localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
   }, [savedEvents]);
 
+  // Update labels based on savedEvents
   useEffect(() => {
     setLabels((prevLabels) => {
       return [...new Set(savedEvents.map((evt) => evt.label))].map(
@@ -104,8 +99,14 @@ export default function ContextWrapper(props) {
         savedEvents,
         setLabels,
         labels,
+        currlabel,
+        setCurrLabel,
         updateLabel,
         filteredEvents,
+        tasks,            // new tasks state
+        setTasks,         // function to update tasks, for example when fetching from an API
+        filteredTasks,    // filtered tasks to show based on label
+        setFilteredTasks, // function to update filtered tasks
       }}
     >
       {props.children}

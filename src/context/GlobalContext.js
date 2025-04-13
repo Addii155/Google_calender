@@ -14,9 +14,35 @@ const GlobalContext = React.createContext({
   selectedEvent: null,
   setSelectedEvent: () => {},
   setLabels: () => {},
-  labels: [],
+  currlabel: "work",
+  labels: [
+    "exercise",
+    "work",
+    "study",
+    "social",
+    "eating",
+    "family",
+    "other",
+  ],
   updateLabel: () => {},
   filteredEvents: [],
 });
+export const labelsClasses = [
+  "exercise",
+  "work",
+  "study",
+  "social",
+  "eating",
+  "family",
+];
+export const colorMap = {
+  exercise: "lightgreen",
+  work: "lightblue",
+  study: "lightpink",
+  social: "lightyellow",
+  eating: "lightgray",
+  family: "lightskyblue",
+  other: "lightgray",
+};
 
 export default GlobalContext;

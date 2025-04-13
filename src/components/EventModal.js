@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 
-const labelsClasses = [
+export const  labelsClasses = [
   "exercise",
   "work",
   "study",
   "social",
   "eating",
-  
+  "family",
+  "other",
 ];
 
 export default function EventModal() {
@@ -78,7 +79,9 @@ export default function EventModal() {
         </header>
         <div className="p-3">
           <div className="grid grid-cols-1/5 items-end gap-y-7">
-            <div></div>
+            <div>
+              
+            </div>
             <input
               type="text"
               name="title"
@@ -107,21 +110,16 @@ export default function EventModal() {
             <span className="material-icons-outlined text-gray-400">
               bookmark_border
             </span>
-            <div className="flex gap-x-2">
-              {labelsClasses.map((lblClass, i) => (
-                <span
-                  key={i}
-                  onClick={() => setSelectedLabel(lblClass)}
-                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
-                >
-                  {selectedLabel === lblClass && (
-                    <span className="material-icons-outlined text-white text-sm">
-                      check
-                    </span>
-                  )}
-                </span>
+            <select 
+              name="label"
+              className="appearance-none cursor-pointer bg-transparent border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              value={selectedLabel}
+              onChange={(e) => setSelectedLabel(e.target.value)}
+            >
+              {labelsClasses.map((label) => (
+                <option key={label}>{label}</option>
               ))}
-            </div>
+            </select>
           </div>
         </div>
         <footer className="flex justify-end border-t p-3 mt-5">
