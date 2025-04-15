@@ -30,6 +30,7 @@ export default function ContextWrapper(props) {
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [labels, setLabels] = useState([]);
+  const [dragdrop, setDragdrop] = useState([]);
   const [tasks, setTasks] = useState([]); // <-- add tasks state here
   const [filteredTasks, setFilteredTasks] = useState([]); // for storing tasks filtered by label
   const [currlabel, setCurrLabel] = useState("work");
@@ -76,6 +77,16 @@ export default function ContextWrapper(props) {
     }
   }, [showEventModal]);
 
+  const updateEventDate =(id, newDate) => {
+    console.log(newDate)
+    // dispatchCalEvent({
+    //   type: "update",
+    //   payload: {
+    //     ...savedEvents.find((evt) => evt.id === id),
+    //     day: newDate,
+    //   },
+    // });
+  }
   function updateLabel(label) {
     setLabels(
       labels.map((lbl) => (lbl.label === label.label ? label : lbl))
@@ -96,6 +107,7 @@ export default function ContextWrapper(props) {
         dispatchCalEvent,
         selectedEvent,
         setSelectedEvent,
+        updateEventDate,
         savedEvents,
         setLabels,
         labels,

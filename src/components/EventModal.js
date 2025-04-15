@@ -25,11 +25,12 @@ export default function EventModal() {
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ""
   );
-  const [selectedLabel, setSelectedLabel] = useState(
-    selectedEvent
-      ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
-      : labelsClasses[0]
+  const [selectedLabel, setSelectedLabel] = useState(null
+    // selectedEvent
+    //   ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
+    //   : labelsClasses[0]
   );
+
 
   function handleSubmit(e) {
     e.preventDefault();

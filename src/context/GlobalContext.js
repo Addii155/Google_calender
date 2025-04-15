@@ -14,6 +14,7 @@ const GlobalContext = React.createContext({
   selectedEvent: null,
   setSelectedEvent: () => {},
   setLabels: () => {},
+  updateEventDate:()=>{},
   currlabel: "work",
   labels: [
     "exercise",

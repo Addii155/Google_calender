@@ -11,5 +11,10 @@ export function getMonth(month = dayjs().month()) {
       return dayjs(new Date(year, month, currentMonthCount));
     });
   });
+  // console.log("daysMatrix: ", daysMatrix);
   return daysMatrix;
 }
+
+export const ItemTypes = {
+  EVENT: "event",
+};
